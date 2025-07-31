@@ -1,0 +1,14 @@
+default_layer {
+    display-name = "Base";
+// -----------------------------------------------------------------------------------------
+// |  Q  |  W  |  F  |  P  |  B  |   |  J  |  L   |  U  |  Y  |  '  |
+// |  A  |  R  |  S  |  T  |  G  |   |  M  |  N   |  E  |  I  |  O  |
+// |  Z  |  X  |  C  |  D  |  V  |   |  K  |  H   |  ,  |  .  |  /  |
+//                    | ESC | SPC | TAB |   | ENT | BSPC  | DEL |
+                        bindings = <
+   &none  &kp Q  &kp W  &kp F  &kp P  &kp B   &kp J  &kp L  &kp U  &kp Y  &kp SQT  &none
+   &none  &mt LCTRL A  &mt LALT R  &mt LCMD S  &mt LSHFT T  &kp G   &kp M  &mt RSHFT N  &mt RCMD E  &mt RALT I  &mt RCTRL O  &none
+   &none  &kp Z &kp X &kp C &kp D &kp V   &kp K &kp H  &kp COMMA &kp DOT &kp FSLH &none
+                  &kp ESC &lt 1 SPACE &kp TAB   &kp RET &lt 1 BSPC &kp DEL
+                        >;
+                };
