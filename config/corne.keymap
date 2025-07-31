@@ -9,48 +9,153 @@
 #include <dt-bindings/zmk/bt.h>
 
 / {
-        keymap {
-                compatible = "zmk,keymap";
-
-                default_layer {
-// -----------------------------------------------------------------------------------------
-// |  TAB |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U   |  I  |  O  |  P  | BSPC |
-// | CTRL |  A  |  S  |  D  |  F  |  G  |   |  H  |  J   |  K  |  L  |  ;  |  '   |
-// | SHFT |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  ,  |  .  |  /  | ESC  |
-//                    | GUI | LWR | SPC |   | ENT | RSE  | ALT |
-                        bindings = <
-   &kp TAB   &kp Q &kp W &kp E &kp R &kp T   &kp Y &kp U  &kp I     &kp O   &kp P    &kp BSPC
-   &kp LCTRL &kp A &kp S &kp D &kp F &kp G   &kp H &kp J  &kp K     &kp L   &kp SEMI &kp SQT
-   &kp LSHFT &kp Z &kp X &kp C &kp V &kp B   &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &kp ESC
-                  &kp LGUI &mo 1 &kp SPACE   &kp RET &mo 2 &kp RALT
-                        >;
-                };
-                lower_layer {
-// -----------------------------------------------------------------------------------------
-// |  TAB |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  | BSPC |
-// | BTCLR| BT1 | BT2 | BT3 | BT4 | BT5 |   | LFT | DWN |  UP | RGT |     |      |
-// | SHFT |     |     |     |     |     |   |     |     |     |     |     |      |
-//                    | GUI |     | SPC |   | ENT |     | ALT |
-                        bindings = <
-   &kp TAB    &kp N1       &kp N2       &kp N3       &kp N4       &kp N5         &kp N6   &kp N7   &kp N8 &kp N9    &kp N0 &kp BSPC
-   &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4   &kp LEFT &kp DOWN &kp UP &kp RIGHT &trans &trans
-   &kp LSHFT  &trans       &trans       &trans       &trans       &trans         &trans   &trans   &trans &trans    &trans &trans
-                                    &kp LGUI     &trans       &kp SPACE      &kp RET  &trans   &kp RALT
-                        >;
-                };
-
-                raise_layer {
-// -----------------------------------------------------------------------------------------
-// |  TAB |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  | BSPC |
-// | CTRL |     |     |     |     |     |   |  -  |  =  |  [  |  ]  |  \  |  `   |
-// | SHFT |     |     |     |     |     |   |  _  |  +  |  {  |  }  | "|" |  ~   |
-//                    | GUI |     | SPC |   | ENT |     | ALT |
-                        bindings = <
-   &kp  TAB  &kp EXCL &kp AT &kp HASH &kp DLLR &kp PRCNT   &kp CARET &kp AMPS  &kp ASTRK &kp LPAR &kp RPAR &kp BSPC
-   &kp LCTRL &trans   &trans &trans   &trans   &trans      &kp MINUS &kp EQUAL &kp LBKT  &kp RBKT &kp BSLH &kp GRAVE
-   &kp LSHFT &trans   &trans &trans   &trans   &trans      &kp UNDER &kp PLUS  &kp LBRC  &kp RBRC &kp PIPE &kp TILDE
-                             &kp LGUI &trans   &kp SPACE   &kp RET   &trans    &kp RALT
-                        >;
-                };
+    behaviors {
+        hm: homerow_mods {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HOMEROW_MODS";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            quick-tap-ms = <125>;
+            global-quick-tap;
+            flavor = "tap-preferred";
+            bindings = <&kp>, <&kp>;
         };
+    };
+
+    keymap {
+        compatible = "zmk,keymap";
+
+        // Base layer - Colemak-DH with home row mods
+        base_layer {
+            label = "Base";
+            bindings = <
+        //╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮
+        //│          │  Q       │  W       │  F       │  P       │  B       │   │  J       │  L       │  U       │  Y       │  ;       │          │
+            &none      &kp Q      &kp W      &kp F      &kp P      &kp B          &kp J      &kp L      &kp U      &kp Y      &kp SEMI   &none
+        //├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│          │  A       │  R       │  S       │  T       │  G       │   │  K       │  N       │  E       │  I       │  O       │          │
+            &none      &hm LGUI A &hm LALT R &hm LCTRL S &hm LSHFT T &kp G        &kp K      &hm RSHFT N &hm RCTRL E &hm RALT I &hm RGUI O &none
+        //├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│          │  Z       │  X       │  C       │  D       │  V       │   │  M       │  H       │ , <      │ . >      │ / ?      │          │
+            &none      &kp Z      &kp X      &kp C      &kp D      &kp V          &kp M      &kp H      &kp COMMA  &kp DOT    &kp FSLH   &none
+        //╰──────────┴──────────┴──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┴──────────┴──────────╯
+                                             &lt 5 ESC   &lt 1 SPACE &lt 3 TAB     &lt 2 RET  &lt 4 BSPC &lt 6 DEL
+        //                                 ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
+            >;
+        };
+
+        // Nav layer
+        nav_layer {
+            label = "Nav";
+            bindings = <
+        //╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮
+        //│          │ RESET    │          │          │          │          │   │ REDO     │ PASTE    │ COPY     │ CUT      │ UNDO     │          │
+            &none      &reset     &trans     &trans     &trans     &trans         &kp K_REDO &kp K_PASTE &kp K_COPY &kp K_CUT  &kp K_UNDO &none
+        //├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│          │ GUI      │ ALT      │ CTRL     │ SHIFT    │          │   │ CAPS     │ LEFT     │ DOWN     │ UP       │ RIGHT    │          │
+            &none      &kp LGUI   &kp LALT   &kp LCTRL  &kp LSHFT  &trans         &kp CAPS   &kp LEFT   &kp DOWN   &kp UP     &kp RIGHT  &none
+        //├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│          │          │          │          │          │          │   │ INSERT   │ HOME     │ PG_DN    │ PG_UP    │ END      │          │
+            &none      &trans     &trans     &trans     &trans     &trans         &kp INS    &kp HOME   &kp PG_DN  &kp PG_UP  &kp END    &none
+        //╰──────────┴──────────┴──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┴──────────┴──────────╯
+                                             &trans     &trans     &trans         &kp RET    &kp BSPC   &kp DEL
+        //                                 ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
+            >;
+        };
+
+        // Sym layer
+        sym_layer {
+            label = "Sym";
+            bindings = <
+        //╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮
+        //│          │ {        │ &        │ *        │ (        │ }        │   │          │          │          │          │ RESET    │          │
+            &none      &kp LBRC   &kp AMPS   &kp ASTRK  &kp LPAR   &kp RBRC       &trans     &trans     &trans     &trans     &reset     &none
+        //├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│          │ :        │ $        │ %        │ ^        │ +        │   │          │ SHIFT    │ CTRL     │ ALT      │ GUI      │          │
+            &none      &kp COLON  &kp DLLR   &kp PRCNT  &kp CARET  &kp PLUS       &trans     &kp RSHFT  &kp RCTRL  &kp RALT   &kp RGUI   &none
+        //├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│          │ ~        │ !        │ @        │ #        │ |        │   │          │          │          │          │          │          │
+            &none      &kp TILDE  &kp EXCL   &kp AT     &kp HASH   &kp PIPE       &trans     &trans     &trans     &trans     &trans     &none
+        //╰──────────┴──────────┴──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┴──────────┴──────────╯
+                                             &kp LPAR   &kp RPAR   &kp UNDER      &trans     &trans     &trans
+        //                                 ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
+            >;
+        };
+
+        // Num layer
+        num_layer {
+            label = "Num";
+            bindings = <
+        //╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮
+        //│          │ [        │ 7        │ 8        │ 9        │ ]        │   │          │          │          │          │ RESET    │          │
+            &none      &kp LBKT   &kp N7     &kp N8     &kp N9     &kp RBKT       &trans     &trans     &trans     &trans     &reset     &none
+        //├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│          │ ;        │ 4        │ 5        │ 6        │ =        │   │          │ SHIFT    │ CTRL     │ ALT      │ GUI      │          │
+            &none      &kp SEMI   &kp N4     &kp N5     &kp N6     &kp EQUAL      &trans     &kp RSHFT  &kp RCTRL  &kp RALT   &kp RGUI   &none
+        //├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│          │ `        │ 1        │ 2        │ 3        │ \        │   │          │          │          │          │          │          │
+            &none      &kp GRAVE  &kp N1     &kp N2     &kp N3     &kp BSLH       &trans     &trans     &trans     &trans     &trans     &none
+        //╰──────────┴──────────┴──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┴──────────┴──────────╯
+                                             &kp DOT    &kp N0     &kp MINUS      &trans     &trans     &trans
+        //                                 ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
+            >;
+        };
+
+        // Fun layer (media and function keys)
+        fun_layer {
+            label = "Fun";
+            bindings = <
+        //╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮
+        //│          │ F12      │ F7       │ F8       │ F9       │ PSCRN    │   │          │          │          │          │ RESET    │          │
+            &none      &kp F12    &kp F7     &kp F8     &kp F9     &kp PSCRN      &trans     &trans     &trans     &trans     &reset     &none
+        //├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│          │ F11      │ F4       │ F5       │ F6       │ SLCK     │   │          │ SHIFT    │ CTRL     │ ALT      │ GUI      │          │
+            &none      &kp F11    &kp F4     &kp F5     &kp F6     &kp SLCK       &trans     &kp RSHFT  &kp RCTRL  &kp RALT   &kp RGUI   &none
+        //├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│          │ F10      │ F1       │ F2       │ F3       │ PAUSE    │   │          │          │          │          │          │          │
+            &none      &kp F10    &kp F1     &kp F2     &kp F3     &kp PAUSE_BREAK &trans    &trans     &trans     &trans     &trans     &none
+        //╰──────────┴──────────┴──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┴──────────┴──────────╯
+                                             &kp K_APP  &kp SPACE  &kp TAB        &trans     &trans     &trans
+        //                                 ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
+            >;
+        };
+
+        // Media layer
+        media_layer {
+            label = "Media";
+            bindings = <
+        //╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮
+        //│          │ RESET    │          │          │          │          │   │          │          │          │          │          │          │
+            &none      &reset     &trans     &trans     &trans     &trans         &trans     &trans     &trans     &trans     &trans     &none
+        //├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│          │ GUI      │ ALT      │ CTRL     │ SHIFT    │          │   │ PREV     │ VOL_DN   │ VOL_UP   │ NEXT     │          │          │
+            &none      &kp LGUI   &kp LALT   &kp LCTRL  &kp LSHFT  &trans         &kp C_PREV &kp C_VOL_DN &kp C_VOL_UP &kp C_NEXT &trans     &none
+        //├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│          │          │          │          │          │          │   │ BT1      │ BT2      │ BT3      │ BT4      │ BT_CLR   │          │
+            &none      &trans     &trans     &trans     &trans     &trans         &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_CLR &none
+        //╰──────────┴──────────┴──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┴──────────┴──────────╯
+                                             &trans     &trans     &trans         &kp C_STOP &kp C_PP   &kp C_MUTE
+        //                                 ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
+            >;
+        };
+
+        // Mouse layer (optional - can be simplified)
+        mouse_layer {
+            label = "Mouse";
+            bindings = <
+        //╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────┬──────────╮
+        //│          │ RESET    │          │          │          │          │   │          │          │          │          │ RESET    │          │
+            &none      &reset     &trans     &trans     &trans     &trans         &trans     &trans     &trans     &trans     &reset     &none
+        //├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│          │ GUI      │ ALT      │ CTRL     │ SHIFT    │          │   │          │ SHIFT    │ CTRL     │ ALT      │ GUI      │          │
+            &none      &kp LGUI   &kp LALT   &kp LCTRL  &kp LSHFT  &trans         &trans     &kp RSHFT  &kp RCTRL  &kp RALT   &kp RGUI   &none
+        //├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
+        //│          │          │          │          │          │          │   │          │          │          │          │          │          │
+            &none      &trans     &trans     &trans     &trans     &trans         &trans     &trans     &trans     &trans     &trans     &none
+        //╰──────────┴──────────┴──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┴──────────┴──────────╯
+                                             &trans     &trans     &trans         &trans     &trans     &trans
+        //                                 ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
+            >;
+        };
+    };
 };
