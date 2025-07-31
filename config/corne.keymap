@@ -3,6 +3,10 @@
 #include <dt-bindings/zmk/bt.h>
 
 / {
+        &mt {
+                tapping-term-ms = <150>;
+                flavor = "tap-preferred";
+        };
         keymap {
                 compatible = "zmk,keymap";
 
