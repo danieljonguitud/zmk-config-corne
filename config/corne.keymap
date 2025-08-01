@@ -4,6 +4,11 @@
 
 #define DEFAULT 0
 #define NAV     1
+#define MOUSE   2
+#define MEDIA   3
+#define NUM     4
+#define SYM     5
+#define FUN     6
 
 / { 
         keymap {
@@ -11,6 +16,11 @@
 
                 #include "layers/base.dtsi"
                 #include "layers/nav.dtsi"
+                #include "layers/mouse.dtsi"
+                #include "layers/media.dtsi"
+                #include "layers/num.dtsi"
+                #include "layers/sym.dtsi"
+                #include "layers/fun.dtsi"
         };
         #include "behaviors.dtsi"
         #include "combos.dtsi"
