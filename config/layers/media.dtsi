@@ -1,1 +1,14 @@
-
+media_layer {
+                        display-name = "MEDIA";
+// -----------------------------------------------------------------------------------------
+// |  TRANS  |  TRANS  |  TRANS  |  TRANS  |  TRANS  |   |  TRANS  |  TRANS  |  TRANS  |  TRANS |   TRANS   |
+// |  TRANS  |  TRANS  |  TRANS  |  TRANS  |  TRANS  |   |  TRANS  |  PREV  |  VUP  |  VDOWN  |  NEXT  |
+// |  TRANS  |  TRANS  |  TRANS  |  TRANS  |  TRANS  |   |  TRANS  |  TRANS  |  TRANS  |  TRANS  |  TRANS  |
+//                        | TRANS |   TRANS  | TRANS |   | TRANS | PLAY PAUSE | MUTE |
+                        bindings = <            
+   &none    &trans    &trans    &trans    &trans    &trans      &trans   &trans &kp C_BRI_UP   &kp C_BRI_DN   &trans    &none
+   &none  &trans    &trans    &trans    &trans    &trans        &trans  &kp C_PREV &kp C_VOL_DN &kp C_VOL_UP    &kp C_NEXT  &none
+   &none  &trans    &trans    &trans    &trans  &trans       &trans  &trans &trans &trans   &trans    &none
+                                  &trans    &trans    &trans     &trans  &kp C_PLAY_PAUSE  &kp C_MUTE
+                        >;
+                };
