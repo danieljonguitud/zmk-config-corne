@@ -1,0 +1,14 @@
+mouse_layer {
+                        display-name = "MOUSE";
+// -----------------------------------------------------------------------------------------
+// |  TRANS  |  TRANS  |  TRANS  |  TRANS  |  TRANS  |   |  TRANS  |  TRANS  |  TRANS  |  TRANS |   TRANS   |
+// |  TRANS  |  TRANS  |  TRANS  |  TRANS  |  TRANS  |   |  TRANS  |  MLEFT  |  MDOWN  |  MUP  |  MRIGHT  |
+// |  TRANS  |  TRANS  |  TRANS  |  TRANS  |  TRANS  |   |  TRANS  |  SLEFT  |  SUP  |  SDOWN  |  SRIGHT  |
+//                        | TRANS |   TRANS  | TRANS |   | TRANS | TRANS | TRANS |
+                        bindings = <            
+   &none    &trans    &trans    &trans    &trans    &trans        &trans   &trans &trans   &trans    &trans    &none
+   &none  &trans    &trans    &trans    &trans    &trans        &trans    &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_UP    &mmv MOVE_RIGHT &none
+   &none  &trans    &trans    &trans    &trans  &trans       &trans  &msc SCRL_LEFT &msc SCRL_UP &msc SCRL_DOWN   &msc SCRL_RIGHT    &none
+                                  &trans    &trans    &trans     &mkp MCLK  &mkp LCLK  &mkp RCLK
+                        >;
+                };
