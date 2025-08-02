@@ -1,14 +1,9 @@
 nav_layer {
-                        display-name = "NAV";
-// -----------------------------------------------------------------------------------------
-// |  TRANS  |  TRANS  |  TRANS  |  TRANS  |  TRANS  |   |  TRANS  |   {  |    }   |  (   |    )    |
-// |  TRANS  |  TRANS  |  TRANS  |  TRANS  |  TRANS  |   |  TRANS  |  UP  |  DOWN  |  UP  |  RIGHT  |
-// |  TRANS  |  TRANS  |  TRANS  |  TRANS  |  TRANS  |   |  TRANS  |   [  |    ]   |   <  |    >    |
-//                        | TRANS |   TRANS  | TRANS |   | TRANS | TRANS | TRANS |
-                        bindings = <            
-   &none    &trans    &trans    &trans    &trans    &trans        &trans   &kp LBRC   &kp RBRC   &kp LPAR    &kp RPAR    &none
-   &none  &trans    &trans    &trans    &trans    &trans        &trans    &kp LEFT &kp DOWN &kp UP    &kp RIGHT &none
-   &none  &trans    &trans    &trans    &trans  &trans       &trans  &kp LBRC &kp RBRC &kp LT   &kp GT    &none
-                                  &trans    &trans    &trans     &trans  &trans  &trans
-                        >;
-                };
+    display-name = "NAV";
+    bindings = <
+        &none  &none     &none    &none    &none     &none    &none   &kp LBRC  &kp RBRC  &kp LPAR  &kp RPAR  &none
+        &none  &kp LCTRL &kp LALT &kp LCMD &kp LSHFT &none    &none   &kp LEFT  &kp DOWN  &kp UP    &kp RIGHT &none
+        &none  &none     &none    &none    &none     &none    &none   &kp RBKT  &kp RBKT    &kp LT    &kp GT     &none
+                                  &none    &none     &none    &kp RET &kp BSPC  &kp DEL
+    >;
+};
