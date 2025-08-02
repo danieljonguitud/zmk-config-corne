@@ -3,7 +3,7 @@ nav_layer {
     bindings = <
         &none  &none     &none    &none    &none     &none    &none   &kp LBRC  &kp RBRC  &kp LPAR  &kp RPAR  &none
         &none  &kp LCTRL &kp LALT &kp LCMD &kp LSHFT &none    &none   &kp LEFT  &kp DOWN  &kp UP    &kp RIGHT &none
-        &none  &none     &none    &none    &none     &none    &none   &kp RBKT  &kp RBKT    &kp LT    &kp GT     &none
+        &none  &none     &none    &none    &none     &none    &none   &kp RBKT  &kp RBKT  &kp LT    &kp GT    &none
                                   &none    &none     &none    &kp RET &kp BSPC  &kp DEL
     >;
 };
