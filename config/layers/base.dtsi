@@ -4,6 +4,6 @@ default_layer {
         &none  &kp Q &kp W  &kp F &kp P  &kp B                               &kp J &kp L  &kp U  &kp Y &kp SQT &none
         &none  &hml LCTRL A  &hml LALT R  &hml LCMD S   &hml LSHFT T &kp G   &kp M  &hmr RSHFT N &hmr RCMD E &hmr RALT I  &hmr RCTRL O  &none
         &none  &kp Z &kp X  &kp C  &kp D &kp V                               &kp K &kp H &kp COMMA &kp DOT   &kp FSLH  &none
-                            &lt MEDIA ESC &lt NAV SPACE &lt MOUSE TAB        &lt SYM RET  &lt NAV BSPC  &lt FUN DEL
+                            &lt MEDIA ESC &lt NAV SPACE &lt MOUSE TAB        &lt SYM RET  &lt NUM BSPC  &lt FUN DEL
     >;
 };
